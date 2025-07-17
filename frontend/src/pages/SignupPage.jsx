@@ -1,8 +1,6 @@
 import { Link } from "react-router";
-import { signup } from "../lib/api.js";
 import { useState } from "react";
 import { ShipWheelIcon } from "lucide-react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useSignUp from "../hooks/useSignUp.js";
 
 const SignupPage = () => {

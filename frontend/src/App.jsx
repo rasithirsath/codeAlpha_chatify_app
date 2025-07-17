@@ -1,11 +1,12 @@
 import { Routes, Route, Navigate } from "react-router";
 import HomePage from "./pages/HomePage.jsx";
-import SignUpPage from "./pages/SignUpPage.jsx";
+import SignUpPage from "./pages/SignupPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import CallPage from "./pages/CallPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnboardingPage.jsx";
+import Layout from "./components/Layout.jsx";
 
 import { Toaster } from "react-hot-toast";
 
@@ -22,13 +23,15 @@ export const App = () => {
     return <PageLoader />;
   }
   return (
-    <div className=" h-screen" data-theme="night">
+    <div className=" h-screen" data-theme="forest">
       <Routes>
         <Route
           path="/"
           element={
             isAuthenticated && isOnboarded ? (
-              <HomePage />
+              <Layout showSidebar={true}>
+                <HomePage />
+              </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
@@ -56,7 +59,7 @@ export const App = () => {
         />
 
         <Route
-          path="/notification"
+          path="/notifications" // ✅ now matches the URL
           element={
             isAuthenticated ? <NotificationsPage /> : <Navigate to="/login" />
           }
