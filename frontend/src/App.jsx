@@ -7,6 +7,7 @@ import CallPage from "./pages/CallPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import OnboardingPage from "./pages/OnboardingPage.jsx";
 import Layout from "./components/Layout.jsx";
+import { useThemeStore } from "./store/useThemeSelector.js";
 
 import { Toaster } from "react-hot-toast";
 
@@ -16,6 +17,7 @@ import useAuthUser from "./hooks/useAuthUser.js";
 export const App = () => {
   // tanstack query example
   const { isLoading, authUser } = useAuthUser();
+  const { theme } = useThemeStore();
   const isAuthenticated = !!authUser;
   const isOnboarded = authUser?.isOnboarded;
 
@@ -23,7 +25,7 @@ export const App = () => {
     return <PageLoader />;
   }
   return (
-    <div className=" h-screen" data-theme="forest">
+    <div className=" h-screen" data-theme={theme}>
       <Routes>
         <Route
           path="/"
