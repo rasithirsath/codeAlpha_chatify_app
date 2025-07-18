@@ -1,4 +1,5 @@
 import express from "express";
+
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
@@ -24,7 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes); // ✅ This was missing
-app.use("/api/chats", chatRoutes); // ✅ This too
+app.use("/api/chat", chatRoutes); // ✅ This too
 
 app.listen(PORT, () => {
   console.log(`Server Running On port ${PORT}`);
