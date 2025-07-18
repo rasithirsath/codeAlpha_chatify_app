@@ -1,21 +1,35 @@
-import { Link } from "react-router";
 import { useState } from "react";
 import { ShipWheelIcon } from "lucide-react";
-import useSignUp from "../hooks/useSignUp.js";
+import { Link } from "react-router";
 
-const SignupPage = () => {
+import useSignUp from "../hooks/useSignUp";
+
+const SignUpPage = () => {
   const [signupData, setSignupData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
-  //This is how we did it at first, without using our custom hook
-  const { isPending, error, signupMutation } = useSignUp;
+
+  // This is how we did it at first, without using our custom hook
+  // const queryClient = useQueryClient();
+  // const {
+  //   mutate: signupMutation,
+  //   isPending,
+  //   error,
+  // } = useMutation({
+  //   mutationFn: signup,
+  //   onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
+  // });
+
+  // This is how we did it using our custom hook - optimized version
+  const { isPending, error, signupMutation } = useSignUp();
 
   const handleSignup = (e) => {
     e.preventDefault();
     signupMutation(signupData);
   };
+
   return (
     <div
       className="h-screen flex items-center justify-center p-4 sm:p-6 md:p-8"
@@ -28,15 +42,17 @@ const SignupPage = () => {
           <div className="mb-4 flex items-center justify-start gap-2">
             <ShipWheelIcon className="size-9 text-primary" />
             <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
-              Chatify
+              Streamify
             </span>
           </div>
+
           {/* ERROR MESSAGE IF ANY */}
           {error && (
             <div className="alert alert-error mb-4">
               <span>{error.response.data.message}</span>
             </div>
           )}
+
           <div className="w-full">
             <form onSubmit={handleSignup}>
               <div className="space-y-4">
@@ -46,6 +62,7 @@ const SignupPage = () => {
                     Join Streamify and start your language learning adventure!
                   </p>
                 </div>
+
                 <div className="space-y-3">
                   {/* FULLNAME */}
                   <div className="form-control w-full">
@@ -104,6 +121,7 @@ const SignupPage = () => {
                       Password must be at least 6 characters long
                     </p>
                   </div>
+
                   <div className="form-control">
                     <label className="label cursor-pointer justify-start gap-2">
                       <input
@@ -124,6 +142,7 @@ const SignupPage = () => {
                     </label>
                   </div>
                 </div>
+
                 <button className="btn btn-primary w-full" type="submit">
                   {isPending ? (
                     <>
@@ -134,6 +153,7 @@ const SignupPage = () => {
                     "Create Account"
                   )}
                 </button>
+
                 <div className="text-center mt-4">
                   <p className="text-sm">
                     Already have an account?{" "}
@@ -146,13 +166,14 @@ const SignupPage = () => {
             </form>
           </div>
         </div>
+
         {/* SIGNUP FORM - RIGHT SIDE */}
         <div className="hidden lg:flex w-full lg:w-1/2 bg-primary/10 items-center justify-center">
           <div className="max-w-md p-8">
             {/* Illustration */}
             <div className="relative aspect-square max-w-sm mx-auto">
               <img
-                src="/Video-call.png"
+                src="/i.png"
                 alt="Language connection illustration"
                 className="w-full h-full"
               />
@@ -174,4 +195,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default SignUpPage;
