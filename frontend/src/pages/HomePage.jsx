@@ -14,7 +14,7 @@ import {
   UsersIcon,
 } from "lucide-react";
 
-// import { capitialize } from "../lib/utils";
+import { capitialize } from "../lib/utils";
 
 import FriendCard, { getLanguageFlag } from "../components/FriendCard";
 import NoFriendsFound from "../components/NoFriendsFound";
@@ -183,4 +183,3 @@ const Home = () => {
 };
 
 export default Home;
-const capitialize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
